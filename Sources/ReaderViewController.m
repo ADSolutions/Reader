@@ -31,11 +31,12 @@
 #import "ReaderContentView.h"
 #import "ReaderThumbCache.h"
 #import "ReaderThumbQueue.h"
+#import "ITReaderMainToolbar.h"
 
 #import <MessageUI/MessageUI.h>
 
 @interface ReaderViewController () <UIScrollViewDelegate, UIGestureRecognizerDelegate, MFMailComposeViewControllerDelegate,
-									ReaderMainToolbarDelegate, ReaderMainPagebarDelegate, ReaderContentViewDelegate, ThumbsViewControllerDelegate>
+									ReaderMainToolbarDelegate,ITReaderMainToolbarDelegate, ReaderMainPagebarDelegate, ReaderContentViewDelegate, ThumbsViewControllerDelegate>
 @end
 
 @implementation ReaderViewController
@@ -44,7 +45,7 @@
 
 	UIScrollView *theScrollView;
 
-	ReaderMainToolbar *mainToolbar;
+	ITReaderMainToolbar *mainToolbar;
 
 	ReaderMainPagebar *mainPagebar;
 
@@ -343,8 +344,9 @@
 
 	CGRect toolbarRect = scrollViewRect; // Toolbar frame
 	toolbarRect.size.height = TOOLBAR_HEIGHT; // Default toolbar height
-	mainToolbar = [[ReaderMainToolbar alloc] initWithFrame:toolbarRect document:document]; // ReaderMainToolbar
+	mainToolbar = [[ITReaderMainToolbar alloc] initWithFrame:toolbarRect document:document]; // ReaderMainToolbar
 	mainToolbar.delegate = self; // ReaderMainToolbarDelegate
+    [mainToolbar setExtendedDelegate:self];
 	[self.view addSubview:mainToolbar];
 
 	CGRect pagebarRect = self.view.bounds;; // Pagebar frame
@@ -927,6 +929,12 @@
 	{
 		if (printInteraction != nil) [printInteraction dismissAnimated:NO];
 	}
+}
+
+#pragma mark - ITReaderMainToolbar
+-(void)presentControllerFromView:(UIViewController *)viewController
+{
+    [self presentViewController:viewController animated:YES completion:nil];
 }
 
 @end

@@ -60,7 +60,8 @@
 
 - (id)initWithFrame:(CGRect)frame
 {
-	return [self initWithFrame:frame document:nil];
+    return [super initWithFrame:frame];
+//	return [self initWithFrame:frame document:nil];
 }
 
 - (id)initWithFrame:(CGRect)frame document:(ReaderDocument *)object

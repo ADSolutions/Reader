@@ -53,4 +53,10 @@
 - (void)hideToolbar;
 - (void)showToolbar;
 
+- (void)doneButtonTapped:(UIButton *)button;
+- (void)thumbsButtonTapped:(UIButton *)button;
+- (void)printButtonTapped:(UIButton *)button;
+- (void)emailButtonTapped:(UIButton *)button;
+- (void)markButtonTapped:(UIButton *)button;
+
 @end
